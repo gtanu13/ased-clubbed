@@ -1,46 +1,44 @@
+// src/components/ui/EventCard.jsx
+import { Link } from 'react-router-dom';
 import { Calendar, Users } from 'lucide-react';
-import Button from './Button';
 import { motion } from 'framer-motion';
 
-export default function EventCard({ event, onRegister, role }) {
+export default function EventCard({ event, role }) {
   const isFull = event.seatsLeft === 0;
 
   return (
     <motion.div 
       whileHover={{ y: -5 }}
-      className="bg-[rgba(26,11,46,0.4)] backdrop-blur-xl border border-[rgba(138,43,226,0.2)] rounded-2xl p-5 flex flex-col justify-between"
+      className="glass-panel p-6 flex flex-col justify-between h-full"
     >
       <div>
-        <div className="flex justify-between items-start mb-3">
-          <h3 className="font-semibold text-lg text-white">{event.title}</h3>
-          <span className="text-xs px-2 py-1 bg-white/5 border border-white/10 rounded-md text-secondary">
+        <div className="flex justify-between items-start mb-4">
+          <h3 className="font-bold text-lg text-white leading-tight">{event.title}</h3>
+          <span className="text-[10px] px-2 py-1 bg-white/5 border border-white/10 rounded text-primary font-bold">
             {event.date}
           </span>
         </div>
         
-        <div className="flex items-center gap-4 text-sm text-gray-400 mb-6">
-          <div className="flex items-center gap-1">
-            <Users size={14} />
-            <span className={isFull ? 'text-rose-400' : 'text-emerald-400'}>
-              {event.seatsLeft} seats left
+        <div className="flex items-center gap-4 text-xs text-white/40 mb-8">
+          <div className="flex items-center gap-1.5">
+            <Users size={14} className="text-primary" />
+            <span className={isFull ? 'text-rose-400' : 'text-primary/80'}>
+              {isFull ? 'Waitlist Only' : `${event.seatsLeft} seats available`}
             </span>
           </div>
         </div>
       </div>
 
-      {role === 'student' && (
-        <Button 
-          variant={event.isRegistered ? "secondary" : (isFull ? "ghost" : "primary")} 
-          className="w-full"
-          disabled={event.isRegistered}
-          onClick={() => onRegister(event.id)}
-        >
-          {event.isRegistered ? "Registered" : (isFull ? "Join Waitlist" : "Register Now")}
-        </Button>
-      )}
-      {role !== 'student' && (
-        <Button variant="secondary" className="w-full">Manage Event</Button>
-      )}
+      <Link 
+        to={`/events/${event.id}/seating`} 
+        className={`w-full py-3 rounded-xl text-center text-xs font-bold uppercase tracking-widest transition-all ${
+          event.isRegistered 
+            ? 'bg-white/5 text-white/20 cursor-default' 
+            : 'bg-gradient-chic text-background hover:shadow-soft-glow'
+        }`}
+      >
+        {event.isRegistered ? "Registered" : (isFull ? "Join Waitlist" : "Register Now")}
+      </Link>
     </motion.div>
   );
 }

@@ -58,6 +58,34 @@ export default function Dashboard() {
       )}
 
       {/* ----------------- ADMIN VIEW ----------------- */}
+      {/* Add this inside your Admin Dashboard block */}
+<div className="glass-panel p-8 mt-10">
+  <div className="flex justify-between items-center mb-8">
+    <h3 className="text-xl font-bold italic tracking-tight text-white">april 2026.</h3>
+    <div className="flex gap-2">
+      <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+      <span className="text-[10px] uppercase tracking-widest text-primary/60 font-bold">Admin View</span>
+    </div>
+  </div>
+  
+  <div className="grid grid-cols-7 gap-px bg-primary/10 rounded-3xl overflow-hidden border border-primary/10">
+    {Array(30).fill(0).map((_, i) => {
+      const day = i + 1;
+      const dayEvents = events.filter(e => e.date === `2026-04-${day < 10 ? '0'+day : day}`);
+      return (
+        <div key={i} className="min-h-[120px] bg-background p-3 hover:bg-white/[0.02] transition-colors">
+          <span className="text-[10px] font-bold text-primary/40">{day}</span>
+          {dayEvents.map(e => (
+            <div key={e.id} className="mt-2 p-1.5 bg-primary/10 border-l-2 border-primary rounded-r text-[9px] text-primary font-bold truncate leading-none">
+              {e.title}
+            </div>
+          ))}
+        </div>
+      );
+    })}
+  </div>
+</div>
+
       {role === 'admin' && (
         <div className="space-y-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

@@ -22,7 +22,7 @@ export default function Home() {
         </h1>
         
         <p className="text-lg text-gray-400 mb-10 max-w-xl mx-auto">
-          The ultimate operating system for RV University clubs. Discover communities, manage events, and track memberships all in one beautiful dashboard.
+          The future of campus life starts here
         </p>
 
         <div className="flex items-center justify-center gap-4">

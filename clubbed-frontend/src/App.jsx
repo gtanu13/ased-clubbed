@@ -9,6 +9,9 @@ import Events from './pages/Events';
 import Venues from './pages/Venues';
 import Members from './pages/Members';
 import Profile from './pages/Profile'; // <--- Ensure this is here
+import EventSeating from './pages/EventSeating';
+
+// Inside <Routes>
 
 export default function App() {
   return (
@@ -26,6 +29,7 @@ export default function App() {
             <Route path="/members" element={<Members />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/events/:id/seating" element={<EventSeating />} />
           </Routes>
         </main>
       </div>
